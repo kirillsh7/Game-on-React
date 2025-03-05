@@ -1,0 +1,6 @@
+.btnRestart {
+	background-color: #18106d;
+}
+.btnRestart:active {
+	border: 1px solid #241c7c;
+}

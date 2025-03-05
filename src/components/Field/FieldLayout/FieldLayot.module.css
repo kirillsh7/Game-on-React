@@ -1,0 +1,9 @@
+.field {
+	display: grid;
+	grid-template-columns: 50px 50px 50px;
+	grid-template-rows: 50px 50px 50px;
+
+	border: 2px solid red;
+	border-radius: 5%;
+	margin-bottom: 20px;
+}
