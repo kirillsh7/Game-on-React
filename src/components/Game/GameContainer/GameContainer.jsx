@@ -27,11 +27,13 @@ const GameContainer = () => {
 				) {
 					setCurrentPlayer(field[a])
 					setIsGameEnded(true)
+
 				}
 			})
 
 			if (!field.includes('') && !isGameEnded) {
 				setIsDraw(true)
+
 			}
 
 

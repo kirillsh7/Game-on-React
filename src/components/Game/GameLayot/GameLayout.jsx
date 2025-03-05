@@ -1,6 +1,7 @@
 import FieldContainer from '../../Field/FieldContainer/FieldContainer'
+import ButtonRestart from '../../ButtonRestart'
 import InformationContainer from '../../Information/InfromationContainer/InformationContainer'
-import styles from './GameLayot.module.css'
+
 const GameLayout = props => {
 	const {
 		currentPlayer,
@@ -29,9 +30,8 @@ const GameLayout = props => {
 				setIsGameEnded={setIsGameEnded}
 				setIsDraw={setIsDraw}
 			/>
-			{isDraw && !isGameEnded && (
-				<button onClick={btnRestart} className={styles.btnRestart}>Начать Заново</button>
-			)}
+			{isGameEnded && <ButtonRestart btnRestart={btnRestart} />}
+			{isDraw && <ButtonRestart btnRestart={btnRestart} />}
 		</>
 	)
 }
