@@ -30,8 +30,8 @@ const GameLayout = props => {
 				setIsGameEnded={setIsGameEnded}
 				setIsDraw={setIsDraw}
 			/>
-			{isGameEnded && <ButtonRestart btnRestart={btnRestart} />}
-			{isDraw && <ButtonRestart btnRestart={btnRestart} />}
+			{(isGameEnded || isDraw) && <ButtonRestart btnRestart={btnRestart} />}
+
 		</>
 	)
 }

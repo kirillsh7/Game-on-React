@@ -17,7 +17,9 @@ const GameContainer = () => {
 	]
 	useEffect(() => {
 		const checkWinPlayer = () => {
-			WIN_PATTERNS.forEach(pattern => {
+			let isWinner = false
+
+			isWinner = WIN_PATTERNS.some(pattern => {
 				const [a, b, c] = pattern
 
 				if (
@@ -27,15 +29,16 @@ const GameContainer = () => {
 				) {
 					setCurrentPlayer(field[a])
 					setIsGameEnded(true)
-
+					return true
 				}
+				return false
 			})
 
-			if (!field.includes('') && !isGameEnded) {
+			if (!isWinner && !field.includes('')) {
 				setIsDraw(true)
+				setIsGameEnded(true)
 
 			}
-
 
 		}
 		checkWinPlayer()
