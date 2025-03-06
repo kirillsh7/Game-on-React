@@ -2,35 +2,18 @@ import FieldContainer from '../../Field/FieldContainer/FieldContainer'
 import ButtonRestart from '../../ButtonRestart'
 import InformationContainer from '../../Information/InfromationContainer/InformationContainer'
 
-const GameLayout = props => {
-	const {
-		currentPlayer,
-		setCurrentPlayer,
-		isGameEnded,
-		setIsGameEnded,
-		isDraw,
-		setIsDraw,
-		field,
-		setField,
-		btnRestart
-	} = props
+const GameLayout = ({ state, handleClickPlayer, btnRestart }) => {
 
 	return (
 		<>
 			<InformationContainer
-				currentPlayer={currentPlayer}
-				isGameEnded={isGameEnded}
-				isDraw={isDraw}
+				{...state}
 			/>
 			<FieldContainer
-				currentPlayer={currentPlayer}
-				setCurrentPlayer={setCurrentPlayer}
-				field={field}
-				setField={setField}
-				setIsGameEnded={setIsGameEnded}
-				setIsDraw={setIsDraw}
+				field={state.field}
+				handleClickPlayer={handleClickPlayer}
 			/>
-			{(isGameEnded || isDraw) && <ButtonRestart btnRestart={btnRestart} />}
+			{(state.isGameEnded || state.isDraw) && <ButtonRestart btnRestart={btnRestart} />}
 
 		</>
 	)
