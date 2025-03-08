@@ -4,7 +4,7 @@ const GameContainer = () => {
 	const [currentPlayer, setCurrentPlayer] = useState('X')
 	const [isGameEnded, setIsGameEnded] = useState(false)
 	const [isDraw, setIsDraw] = useState(false)
-	const [field, setField] = useState(['', '', '', '', '', '', '', '', ''])
+	const [field, setField] = useState(new Array(9).fill(''))
 	const state = {
 		field,
 		currentPlayer,
@@ -26,50 +26,45 @@ const GameContainer = () => {
 
 
 	const checkWinPlayer = (fieldCopy) => {
-		let isWinner = false
 
-		isWinner = WIN_PATTERNS.some(pattern => {
+		return WIN_PATTERNS.some(pattern => {
+
 			const [a, b, c] = pattern
 
-			if (
-				fieldCopy[a] &&
-				fieldCopy[a] === fieldCopy[b] &&
-				fieldCopy[a] === fieldCopy[c]
-			) {
-				setCurrentPlayer(field[a])
-				setIsGameEnded(true)
-				return true
-			}
-			return false
+			return fieldCopy[a] && fieldCopy[a] === fieldCopy[b] && fieldCopy[a] === fieldCopy[c]
+
 		})
-
-		if (!isWinner && !field.includes('')) {
-			setIsDraw(true)
-			setIsGameEnded(true)
-
-		}
 
 	}
 
-
-
 	const handleClickPlayer = index => {
-		const fieldCopy = [...field]
+		let fieldCopy = [...field]
 		if (fieldCopy[index] === '') {
 			setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X')
 			fieldCopy[index] = currentPlayer
 			setField(fieldCopy)
+
+			let winner = checkWinPlayer(fieldCopy)
+			if (winner) {
+				setCurrentPlayer(currentPlayer)
+				setIsGameEnded(true)
+			}
+			if (fieldCopy.every(item => item !== '') && !winner) {
+				setIsDraw(true)
+			}
+
+
 		}
-		checkWinPlayer(fieldCopy)
+
+
 	}
-
-
 	const btnRestart = () => {
 		setCurrentPlayer('X')
 		setIsGameEnded(false)
 		setIsDraw(false)
 		setField(['', '', '', '', '', '', '', '', ''])
 	}
+
 	return (
 		<GameLayout
 			state={state}
@@ -78,4 +73,5 @@ const GameContainer = () => {
 		/>
 	)
 }
+
 export default GameContainer
